@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block Content %}
+
+<!-- Template Form -->
+<button class="showFormBtn" data-form="templateForm">Template Form</button> 
+
+<div class="formPopup popup" id="templateForm">
+        <span class="close" id="closeFormBtn"></span>
+        <form id="templateFormElement"></form>
+            <div class="popup-content">
+                <h1>Template Form</h1>
+            <!-- Form Fields Here -->
+                <div class="form-grid">
+                    {% csrf_token %}
+                    {{ form.as_p }}  <!-- Renders the form fields -->
+                    <button type="submit">Submit</button>
+                    <button type="button" class="closeFormBtn">Close</button>
+                </div>
+            </div>
+        </form>
+</div>
+
+
+
+<!-- Product Form -->
+<button class="showFormBtn" data-form="productForm">Product Form</button>
+<div class="formPopup popup" id="productForm">
+        <span class="close" id="closeFormBtn"></span>
+        <form id="productFormElement">
+            <div class="popup-content">
+                <h1>Product Form</h1>
+            <!-- Form Fields Here -->
+            <div class="form-grid">
+                {% csrf_token %}
+                {{ formb.as_p }} 
+                <button type="submit">Submit</button>
+                <button type="button" class="closeFormBtn">Close</button>
+            </div>
+            </div>
+        </form>
+</div>
+
+<!-- Customer Form -->
+<button class="showFormBtn" data-form="customerForm">Show Customer Form</button>
+<div class="formPopup popup" id="customerForm">
+    <span class="close" id="closeFormBtn"></span>
+    <form id="customerFormElement">
+        <div class="popup-content">
+            <h1>Customer Form</h1>
+        <!-- Form Fields Here -->
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="Phone_No">Phone No:</label>
+                    <input type="text" id="Phone_No" name="Phone_No" required>
+                </div>
+            
+                <button type="submit">Submit</button>
+                <button type="button" class="closeFormBtn">Close</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- Additional Forms for Task, Inventory, Sales -->
+
+
+
+<!-- Success message container (initially hidden) -->
+<div id="successMessage" style="display: none;">Form submitted successfully!</div>
+
+{% endblock Content %}

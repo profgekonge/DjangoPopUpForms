@@ -1,0 +1,183 @@
+{% block Content %}
+{% endblock Content %}
+
+<!-- Styles CSS -->
+
+<style>
+        
+    .popup {
+        display: none;
+        position: fixed;
+        z-index: 15;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .popup-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 40%;
+        max-width: 500px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    h2 {
+        margin-top: 0;
+        color: #333;
+        font-size: 1.5em;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 3px;
+        font-weight: bold;
+        color: #555;
+        font-size: 0.9em;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+        width: 100%;
+        padding: 6px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 0.9em;
+    }
+
+    input[type="file"] {
+        margin-top: 3px;
+        max-width: 100%;
+        font-size: 0.9em;
+    }
+
+    input[type="checkbox"] {
+        margin-right: 5px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9em;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    #showFormBtn {
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .popup-content {
+            width: 80%;
+            margin: 10% auto;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .popup-content {
+            width: 95%;
+            padding: 15px;
+        }
+
+        h2 {
+            font-size: 1.3em;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+   
+</style>
+
+<!-- Js Scripts -->
+<script>
+    document.querySelectorAll('.showFormBtn').forEach(button => {
+        button.addEventListener('click', () => {
+            const formId = button.getAttribute('data-form');
+            const formPopup = document.getElementById(formId);
+            formPopup.style.display = 'block';
+        });
+    });
+    
+    document.querySelectorAll('.closeFormBtn').forEach(button => {
+        button.addEventListener('click', () => {
+            button.closest('.formPopup').style.display = 'none';
+        });
+    });
+    
+    window.addEventListener('click', (event) => {
+        const formPopup = event.target.closest('.formPopup');
+        if (formPopup && event.target === formPopup) {
+            formPopup.style.display = 'none';
+        }
+    });
+    
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Handle form submission here (e.g., send data)
+            console.log(`${form.id} submitted`);
+    
+            // Show the success message
+            var successMessage = document.getElementById('successMessage');
+            successMessage.innerHTML = `${form.id} submitted successfully!`;  // Customize message
+            successMessage.style.display = 'block';
+            
+            // Hide the form popup
+            form.closest('.formPopup').style.display = 'none';
+            
+            // Clear the form fields
+            form.reset();
+        
+
+            // Hide the success message after 2 seconds
+            setTimeout(function() {
+                successMessage.style.display = 'none';
+            }, 2000);
+        });
+    });
+    
+</script>
